@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+
+		"rootDir": "./src",
+		"outDir": "./dist",
+
+		"strict": true,
+
+		"esModuleInterop": true, //Дозволяє красиво писати: import express from "express";
+
+		"skipLibCheck": true,
+
+		"forceConsistentCasingInFileNames": true,
+
+		"types": ["node"],
+
+		"sourceMap": true
+	},
+
+	"include": ["src"],
+
+	"exclude": ["node_modules", "dist"]
+}

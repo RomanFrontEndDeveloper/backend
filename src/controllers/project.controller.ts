@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { ZodError } from 'zod';
-
-import { createProject } from '../services/project.service';
+import { createProject, getProjects } from '../services/project.service';
 import { createProjectSchema } from '../validation/project.validation';
 import { ApiError } from '../utils/ApiError';
 
@@ -21,4 +20,12 @@ export const createProjectController = async (req: Request, res: Response) => {
 
 		throw error;
 	}
+};
+
+export const getProjectsController = async (req: Request, res: Response) => {
+	const userId = req.userId!;
+
+	const result = await getProjects(userId);
+
+	res.json(result);
 };

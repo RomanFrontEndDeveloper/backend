@@ -17,10 +17,41 @@ export const createProject = async (data: CreateProjectDto, userId: string) => {
 	};
 };
 
-export const getProjects = async (userId: string) => {
-	const projects = await Project.find({
+export const getProjects = async (userId: string, search?: string) => {
+	const filter: {
+		owner: string;
+		$or?: {
+			title?: {
+				$regex: string;
+				$options: string;
+			};
+			description?: {
+				$regex: string;
+				$options: string;
+			};
+		}[];
+	} = {
 		owner: userId,
-	}).sort({
+	};
+
+	if (search) {
+		filter.$or = [
+			{
+				title: {
+					$regex: search,
+					$options: 'i',
+				},
+			},
+			{
+				description: {
+					$regex: search,
+					$options: 'i',
+				},
+			},
+		];
+	}
+
+	const projects = await Project.find(filter).sort({
 		createdAt: -1,
 	});
 

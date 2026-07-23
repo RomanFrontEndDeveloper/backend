@@ -48,8 +48,9 @@ export const createProjectController = async (req: Request, res: Response) => {
 
 export const getProjectsController = async (req: Request, res: Response) => {
 	const userId = req.userId!;
+	const search = req.query.search as string | undefined;
 
-	const result = await getProjects(userId);
+	const result = await getProjects(userId, search);
 
 	res.json(result);
 };

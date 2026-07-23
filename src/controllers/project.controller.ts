@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import { ZodError } from 'zod';
 import {
 	createProject,
-	getProjects,
+	deleteProject,
 	getProjectById,
+	getProjects,
 	updateProject,
 } from '../services/project.service';
 import { createProjectSchema } from '../validation/project.validation';
@@ -59,6 +60,15 @@ export const getProjectByIdController = async (req: Request, res: Response) => {
 	const projectId = req.params.id as string;
 
 	const result = await getProjectById(projectId, userId);
+
+	res.json(result);
+};
+
+export const deleteProjectController = async (req: Request, res: Response) => {
+	const userId = req.userId!;
+	const projectId = req.params.id as string;
+
+	const result = await deleteProject(projectId, userId);
 
 	res.json(result);
 };

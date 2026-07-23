@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
 	createProjectController,
+	deleteProjectController,
 	getProjectByIdController,
 	getProjectsController,
 	updateProjectController,
@@ -13,5 +14,6 @@ router.post('/', authMiddleware, createProjectController);
 router.get('/', authMiddleware, getProjectsController);
 router.get('/:id', authMiddleware, getProjectByIdController);
 router.put('/:id', authMiddleware, updateProjectController);
+router.delete('/:id', authMiddleware, deleteProjectController);
 
 export default router;

@@ -65,3 +65,16 @@ export const getProjectById = async (projectId: string, userId: string) => {
 		project,
 	};
 };
+
+export const deleteProject = async (projectId: string, userId: string) => {
+	const project = await Project.findOneAndDelete({
+		_id: projectId,
+		owner: userId,
+	});
+
+	return {
+		success: true,
+		project,
+		message: 'Project deleted successfully',
+	};
+};

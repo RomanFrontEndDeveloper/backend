@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
 import { ZodError } from 'zod';
-import { createProject, getProjects } from '../services/project.service';
+import {
+	createProject,
+	getProjects,
+	getProjectById,
+	updateProject,
+} from '../services/project.service';
 import { createProjectSchema } from '../validation/project.validation';
 import { ApiError } from '../utils/ApiError';
 
@@ -26,6 +31,34 @@ export const getProjectsController = async (req: Request, res: Response) => {
 	const userId = req.userId!;
 
 	const result = await getProjects(userId);
+
+	res.json(result);
+};
+
+export const updateProjectController = async (req: Request, res: Response) => {
+	try {
+		const data = createProjectSchema.parse(req.body);
+
+		const userId = req.userId!;
+		const projectId = req.params.id as string;
+
+		const result = await updateProject(projectId, userId, data);
+
+		res.json(result);
+	} catch (error) {
+		if (error instanceof ZodError) {
+			throw new ApiError(400, error.issues[0].message);
+		}
+
+		throw error;
+	}
+};
+
+export const getProjectByIdController = async (req: Request, res: Response) => {
+	const userId = req.userId!;
+	const projectId = req.params.id as string;
+
+	const result = await getProjectById(projectId, userId);
 
 	res.json(result);
 };

@@ -9,6 +9,7 @@ import {
 } from '../services/project.service';
 import { createProjectSchema } from '../validation/project.validation';
 import { ApiError } from '../utils/ApiError';
+import { uploadToCloudinary } from '../services/cloudinary.service';
 
 export const createProjectController = async (req: Request, res: Response) => {
 	try {
@@ -16,7 +17,24 @@ export const createProjectController = async (req: Request, res: Response) => {
 
 		const userId = req.userId!;
 
-		const result = await createProject(data, userId);
+		let imageUrl = '';
+		let imagePublicId = '';
+
+		if (req.file) {
+			const uploadedImage = await uploadToCloudinary(req.file.buffer);
+
+			imageUrl = uploadedImage.secure_url;
+			imagePublicId = uploadedImage.public_id;
+		}
+
+		const result = await createProject(
+			{
+				...data,
+				imageUrl,
+				imagePublicId,
+			},
+			userId,
+		);
 
 		res.status(201).json(result);
 	} catch (error) {

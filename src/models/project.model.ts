@@ -4,6 +4,8 @@ interface IProject {
 	title: string;
 	description: string;
 	owner: Types.ObjectId;
+	imageUrl?: string;
+	imagePublicId?: string;
 }
 
 const projectSchema = new Schema<IProject>(
@@ -17,6 +19,15 @@ const projectSchema = new Schema<IProject>(
 			type: String,
 			required: true,
 			trim: true,
+		},
+		imageUrl: {
+			type: String,
+			default: '',
+		},
+
+		imagePublicId: {
+			type: String,
+			default: '',
 		},
 		owner: {
 			type: Schema.Types.ObjectId,

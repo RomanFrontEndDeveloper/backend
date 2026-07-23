@@ -5,6 +5,8 @@ export const createProject = async (data: CreateProjectDto, userId: string) => {
 	const project = await Project.create({
 		title: data.title,
 		description: data.description,
+		imageUrl: data.imageUrl,
+		imagePublicId: data.imagePublicId,
 		owner: userId,
 	});
 

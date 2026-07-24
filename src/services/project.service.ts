@@ -1,6 +1,8 @@
 import { CreateProjectDto, UpdateProjectDto } from '../dto/project.dto';
 import { Project } from '../models/project.model';
 
+const DEFAULT_LIMIT = 3;
+
 export const createProject = async (data: CreateProjectDto, userId: string) => {
 	const project = await Project.create({
 		title: data.title,
@@ -17,7 +19,12 @@ export const createProject = async (data: CreateProjectDto, userId: string) => {
 	};
 };
 
-export const getProjects = async (userId: string, search?: string) => {
+export const getProjects = async (
+	userId: string,
+	search?: string,
+	page = 1,
+	limit = DEFAULT_LIMIT,
+) => {
 	const filter: {
 		owner: string;
 		$or?: {
@@ -33,6 +40,8 @@ export const getProjects = async (userId: string, search?: string) => {
 	} = {
 		owner: userId,
 	};
+
+	const skip = (page - 1) * limit;
 
 	if (search) {
 		filter.$or = [
@@ -50,14 +59,23 @@ export const getProjects = async (userId: string, search?: string) => {
 			},
 		];
 	}
+	const projects = await Project.find(filter)
+		.sort({
+			createdAt: -1,
+		})
+		.skip(skip)
+		.limit(limit);
 
-	const projects = await Project.find(filter).sort({
-		createdAt: -1,
-	});
+	const totalProjects = await Project.countDocuments(filter);
+
+	const totalPages = Math.ceil(totalProjects / limit);
 
 	return {
 		success: true,
 		projects,
+		currentPage: page,
+		totalPages,
+		totalProjects,
 	};
 };
 

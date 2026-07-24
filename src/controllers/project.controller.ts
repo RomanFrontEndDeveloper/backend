@@ -45,12 +45,16 @@ export const createProjectController = async (req: Request, res: Response) => {
 		throw error;
 	}
 };
-
 export const getProjectsController = async (req: Request, res: Response) => {
 	const userId = req.userId!;
+
 	const search = req.query.search as string | undefined;
 
-	const result = await getProjects(userId, search);
+	const page = Number(req.query.page) || 1;
+
+	const limit = req.query.limit ? Number(req.query.limit) : undefined;
+
+	const result = await getProjects(userId, search, page, limit);
 
 	res.json(result);
 };

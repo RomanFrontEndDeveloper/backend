@@ -19,7 +19,12 @@ router.post(
 );
 router.get('/', authMiddleware, getProjectsController);
 router.get('/:id', authMiddleware, getProjectByIdController);
-router.put('/:id', authMiddleware, updateProjectController);
+router.put(
+	'/:id',
+	authMiddleware,
+	upload.single('image'),
+	updateProjectController,
+);
 router.delete('/:id', authMiddleware, deleteProjectController);
 
 export default router;

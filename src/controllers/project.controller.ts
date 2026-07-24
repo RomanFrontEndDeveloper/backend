@@ -66,7 +66,21 @@ export const updateProjectController = async (req: Request, res: Response) => {
 		const userId = req.userId!;
 		const projectId = req.params.id as string;
 
-		const result = await updateProject(projectId, userId, data);
+		let imageUrl: string | undefined;
+		let imagePublicId: string | undefined;
+
+		if (req.file) {
+			const uploadedImage = await uploadToCloudinary(req.file.buffer);
+
+			imageUrl = uploadedImage.secure_url;
+			imagePublicId = uploadedImage.public_id;
+		}
+
+		const result = await updateProject(projectId, userId, {
+			...data,
+			imageUrl,
+			imagePublicId,
+		});
 
 		res.json(result);
 	} catch (error) {

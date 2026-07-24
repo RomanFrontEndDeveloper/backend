@@ -1,5 +1,6 @@
 import { CreateProjectDto, UpdateProjectDto } from '../dto/project.dto';
 import { Project } from '../models/project.model';
+import { deleteFromCloudinary } from './cloudinary.service';
 
 const DEFAULT_LIMIT = 3;
 
@@ -84,19 +85,28 @@ export const updateProject = async (
 	userId: string,
 	data: UpdateProjectDto,
 ) => {
-	const project = await Project.findOneAndUpdate(
-		{
-			_id: projectId,
-			owner: userId,
-		},
-		{
-			title: data.title,
-			description: data.description,
-		},
-		{
-			new: true,
-		},
-	);
+	const project = await Project.findOne({
+		_id: projectId,
+		owner: userId,
+	});
+
+	if (!project) {
+		throw new Error('Project not found');
+	}
+
+	project.title = data.title;
+	project.description = data.description;
+
+	if (data.imageUrl && data.imagePublicId) {
+		if (project.imagePublicId) {
+			await deleteFromCloudinary(project.imagePublicId);
+		}
+
+		project.imageUrl = data.imageUrl;
+		project.imagePublicId = data.imagePublicId;
+	}
+
+	await project.save();
 
 	return {
 		success: true,

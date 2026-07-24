@@ -1,7 +1,10 @@
 import { UploadApiResponse } from 'cloudinary';
 import { Readable } from 'stream';
-
 import cloudinary from '../config/cloudinary';
+
+export const deleteFromCloudinary = async (publicId: string) => {
+	return cloudinary.uploader.destroy(publicId);
+};
 
 export const uploadToCloudinary = (
 	buffer: Buffer,

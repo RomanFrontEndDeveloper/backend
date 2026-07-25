@@ -19,7 +19,7 @@ export const login = async (data: LoginDto) => {
 		throw new ApiError(401, 'Invalid email or password');
 	}
 
-	const token = generateToken(user._id.toString());
+	const token = generateToken(user._id.toString(), user.role);
 
 	return {
 		success: true,
@@ -27,6 +27,7 @@ export const login = async (data: LoginDto) => {
 		user: {
 			id: user._id,
 			email: user.email,
+			role: user.role,
 		},
 		message: 'Login successful',
 	};
@@ -48,11 +49,15 @@ export const register = async (data: RegisterDto) => {
 		password: hashedPassword,
 	});
 
+	const token = generateToken(user._id.toString(), user.role);
+
 	return {
 		success: true,
+		token,
 		user: {
 			id: user._id,
 			email: user.email,
+			role: user.role,
 		},
 		message: 'Registration successful',
 	};

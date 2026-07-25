@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 type JwtPayload = {
 	userId: string;
+	role: 'user' | 'admin';
 };
 
 export const authMiddleware = (
@@ -31,6 +32,7 @@ export const authMiddleware = (
 		const decoded = jwt.verify(token, jwtSecret) as JwtPayload;
 
 		req.userId = decoded.userId;
+		req.userRole = decoded.role;
 
 		next();
 	} catch {

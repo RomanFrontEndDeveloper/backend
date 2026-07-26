@@ -49,16 +49,8 @@ export const register = async (data: RegisterDto) => {
 		password: hashedPassword,
 	});
 
-	const token = generateToken(user._id.toString(), user.role);
-
 	return {
 		success: true,
-		token,
-		user: {
-			id: user._id,
-			email: user.email,
-			role: user.role,
-		},
 		message: 'Registration successful',
 	};
 };

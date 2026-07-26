@@ -22,12 +22,13 @@ export const createProject = async (data: CreateProjectDto, userId: string) => {
 
 export const getProjects = async (
 	userId: string,
+	userRole: string,
 	search?: string,
 	page = 1,
 	limit = DEFAULT_LIMIT,
 ) => {
 	const filter: {
-		owner: string;
+		owner?: string;
 		$or?: {
 			title?: {
 				$regex: string;
@@ -38,11 +39,11 @@ export const getProjects = async (
 				$options: string;
 			};
 		}[];
-	} = {
-		owner: userId,
-	};
+	} = {};
 
-	const skip = (page - 1) * limit;
+	if (userRole !== 'admin') {
+		filter.owner = userId;
+	}
 
 	if (search) {
 		filter.$or = [
@@ -60,10 +61,11 @@ export const getProjects = async (
 			},
 		];
 	}
+
+	const skip = (page - 1) * limit;
+
 	const projects = await Project.find(filter)
-		.sort({
-			createdAt: -1,
-		})
+		.sort({ createdAt: -1 })
 		.skip(skip)
 		.limit(limit);
 
@@ -83,12 +85,15 @@ export const getProjects = async (
 export const updateProject = async (
 	projectId: string,
 	userId: string,
+	userRole: string,
 	data: UpdateProjectDto,
 ) => {
-	const project = await Project.findOne({
-		_id: projectId,
-		owner: userId,
-	});
+	const filter =
+		userRole === 'admin'
+			? { _id: projectId }
+			: { _id: projectId, owner: userId };
+
+	const project = await Project.findOne(filter);
 
 	if (!project) {
 		throw new Error('Project not found');
@@ -115,11 +120,21 @@ export const updateProject = async (
 	};
 };
 
-export const getProjectById = async (projectId: string, userId: string) => {
-	const project = await Project.findOne({
-		_id: projectId,
-		owner: userId,
-	});
+export const getProjectById = async (
+	projectId: string,
+	userId: string,
+	userRole: string,
+) => {
+	const filter =
+		userRole === 'admin'
+			? { _id: projectId }
+			: { _id: projectId, owner: userId };
+
+	const project = await Project.findOne(filter);
+
+	if (!project) {
+		throw new Error('Project not found');
+	}
 
 	return {
 		success: true,
@@ -127,15 +142,30 @@ export const getProjectById = async (projectId: string, userId: string) => {
 	};
 };
 
-export const deleteProject = async (projectId: string, userId: string) => {
-	const project = await Project.findOneAndDelete({
-		_id: projectId,
-		owner: userId,
-	});
+export const deleteProject = async (
+	projectId: string,
+	userId: string,
+	userRole: string,
+) => {
+	const filter =
+		userRole === 'admin'
+			? { _id: projectId }
+			: { _id: projectId, owner: userId };
+
+	const project = await Project.findOne(filter);
+
+	if (!project) {
+		throw new Error('Project not found');
+	}
+
+	if (project.imagePublicId) {
+		await deleteFromCloudinary(project.imagePublicId);
+	}
+
+	await project.deleteOne();
 
 	return {
 		success: true,
-		project,
 		message: 'Project deleted successfully',
 	};
 };

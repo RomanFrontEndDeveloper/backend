@@ -45,16 +45,16 @@ export const createProjectController = async (req: Request, res: Response) => {
 		throw error;
 	}
 };
+
 export const getProjectsController = async (req: Request, res: Response) => {
 	const userId = req.userId!;
+	const userRole = req.userRole!;
 
 	const search = req.query.search as string | undefined;
-
 	const page = Number(req.query.page) || 1;
-
 	const limit = req.query.limit ? Number(req.query.limit) : undefined;
 
-	const result = await getProjects(userId, search, page, limit);
+	const result = await getProjects(userId, userRole, search, page, limit);
 
 	res.json(result);
 };
@@ -64,7 +64,8 @@ export const updateProjectController = async (req: Request, res: Response) => {
 		const data = createProjectSchema.parse(req.body);
 
 		const userId = req.userId!;
-		const projectId = req.params.id as string;
+		const userRole = req.userRole!;
+		const projectId = req.params.id;
 
 		let imageUrl: string | undefined;
 		let imagePublicId: string | undefined;
@@ -76,7 +77,7 @@ export const updateProjectController = async (req: Request, res: Response) => {
 			imagePublicId = uploadedImage.public_id;
 		}
 
-		const result = await updateProject(projectId, userId, {
+		const result = await updateProject(projectId, userId, userRole, {
 			...data,
 			imageUrl,
 			imagePublicId,
@@ -94,18 +95,20 @@ export const updateProjectController = async (req: Request, res: Response) => {
 
 export const getProjectByIdController = async (req: Request, res: Response) => {
 	const userId = req.userId!;
-	const projectId = req.params.id as string;
+	const userRole = req.userRole!;
+	const projectId = req.params.id;
 
-	const result = await getProjectById(projectId, userId);
+	const result = await getProjectById(projectId, userId, userRole);
 
 	res.json(result);
 };
 
 export const deleteProjectController = async (req: Request, res: Response) => {
 	const userId = req.userId!;
-	const projectId = req.params.id as string;
+	const userRole = req.userRole!;
+	const projectId = req.params.id;
 
-	const result = await deleteProject(projectId, userId);
+	const result = await deleteProject(projectId, userId, userRole);
 
 	res.json(result);
 };

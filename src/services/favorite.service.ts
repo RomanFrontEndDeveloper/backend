@@ -27,10 +27,12 @@ export const removeFavorite = async (userId: string, projectId: string) => {
 export const getFavorites = async (userId: string) => {
 	const favorites = await Favorite.find({
 		user: userId,
-	}).populate('project');
+	})
+		.populate('project')
+		.lean();
 
 	return {
 		success: true,
-		favorites,
+		favorites: favorites.filter((favorite) => favorite.project),
 	};
 };

@@ -1,98 +1,106 @@
-# FreelanceHub Backend
-
 # FreelanceHub
 
-FreelanceHub is a modern full-stack freelance marketplace built with **Next.js**, **React**, **TypeScript**, **Node.js**, and **MongoDB**. The application allows users to create, browse, edit, and manage freelance projects with secure authentication and a responsive user interface.
+FreelanceHub is a modern full-stack freelance marketplace built with **Next.js**, **React**, **TypeScript**, **Node.js**, **Express**, and **MongoDB**. The application allows users to register, authenticate, create, browse, edit, and manage freelance projects with a modern responsive interface.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-- User authentication (JWT)
-- User registration & login
-- Protected routes
-- User profile
-- Create, edit and delete projects
-- Project search
-- Project filtering
-- Pagination
-- Project favorites
+- JWT Authentication
+- User Registration & Login
+- Protected Routes
+- User Profile
 - Dashboard
-- User/Admin roles
-- Image upload (Cloudinary)
-- Dark / Light theme
-- Responsive design
-- Form validation with Zod
+- Create Projects
+- Edit Projects
+- Delete Projects
+- Project Details
+- Search Projects
+- Pagination
+- Favorite Projects
+- Image Upload (Cloudinary)
+- Dark / Light Theme
+- Responsive Design
+- Form Validation (Zod)
 - React Hook Form
 - TanStack Query
 - REST API
-- Modern UI built with Tailwind CSS
+- Clean UI with Tailwind CSS
 
 ---
 
-## 🛠 Tech Stack
+# 🛠 Tech Stack
 
-### Frontend
+## Frontend
 
 - Next.js (App Router)
 - React
 - TypeScript
 - Tailwind CSS
-- React Hook Form
-- Zod
 - Axios
 - TanStack Query
+- React Hook Form
+- Zod
 
-### Backend
+## Backend
 
 - Node.js
 - Express.js
 - TypeScript
 - MongoDB
 - Mongoose
-- JWT Authentication
+- JWT
 - Cloudinary
 - Multer
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
-```
+```text
 frontend/
 │
 ├── app/
 ├── shared/
+│   ├── api/
+│   ├── hooks/
+│   ├── providers/
+│   ├── ui/
+│   └── validation/
 ├── widgets/
-├── features/
-├── entities/
-└── public/
+├── public/
+└── ...
 
 backend/
 │
 ├── src/
+│   ├── config/
 │   ├── controllers/
+│   ├── dto/
 │   ├── middleware/
 │   ├── models/
 │   ├── routes/
 │   ├── services/
+│   ├── types/
 │   ├── utils/
-│   └── validators/
+│   ├── validation/
+│   ├── app.ts
+│   └── server.ts
 ```
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
-### Clone repository
+## Clone repository
 
 ```bash
-git clone https://github.com/your-username/FreelanceHub.git
+git clone https://github.com/RomanFrontEndDeveloper/FreelanceHub.git
 ```
 
 ---
 
-### Frontend
+## Frontend
 
 ```bash
 cd frontend
@@ -102,15 +110,15 @@ npm install
 npm run dev
 ```
 
-Frontend runs on:
+Runs on:
 
-```
+```text
 http://localhost:3000
 ```
 
 ---
 
-### Backend
+## Backend
 
 ```bash
 cd backend
@@ -120,17 +128,17 @@ npm install
 npm run dev
 ```
 
-Backend runs on:
+Runs on:
 
-```
+```text
 http://localhost:5000
 ```
 
 ---
 
-## 🔐 Environment Variables
+# 🔐 Environment Variables
 
-### Backend
+## Backend
 
 Create `.env`
 
@@ -150,7 +158,7 @@ CLOUDINARY_API_SECRET=
 
 ---
 
-### Frontend
+## Frontend
 
 Create `.env.local`
 
@@ -160,26 +168,26 @@ NEXT_PUBLIC_API_URL=http://localhost:5000/api
 
 ---
 
-## 📸 Main Features
+# 📸 Main Features
 
-### Authentication
+## Authentication
 
 - Register
 - Login
 - JWT Authentication
 - Protected Routes
 
-### Projects
+## Projects
 
 - Create Project
 - Edit Project
 - Delete Project
-- Browse Projects
+- Project Details
 - Search
-- Filter
 - Pagination
+- Image Upload
 
-### User
+## User
 
 - Dashboard
 - Profile
@@ -188,89 +196,86 @@ NEXT_PUBLIC_API_URL=http://localhost:5000/api
 
 ---
 
-## 📦 API
+# 📦 REST API
 
-### Authentication
+## Authentication
 
-```
-POST /api/auth/register
-
-POST /api/auth/login
-
-GET /api/auth/profile
+```http
+POST   /api/auth/register
+POST   /api/auth/login
+GET    /api/auth/profile
 ```
 
-### Projects
+## Projects
 
-```
-GET /api/projects
-
-GET /api/projects/:id
-
-POST /api/projects
-
-PATCH /api/projects/:id
-
-DELETE /api/projects/:id
+```http
+GET     /api/projects
+GET     /api/projects/:id
+POST    /api/projects
+PATCH   /api/projects/:id
+DELETE  /api/projects/:id
 ```
 
-### Favorites
+## Favorites
 
-```
-GET /api/favorites
-
-POST /api/favorites/:projectId
-
-DELETE /api/favorites/:projectId
+```http
+GET     /api/favorites
+POST    /api/favorites/:projectId
+DELETE  /api/favorites/:projectId
 ```
 
 ---
 
-## 📈 Current Status
+# 📈 Current Status
 
-✅ Authentication
+- ✅ Authentication
+- ✅ Registration
+- ✅ Protected Routes
+- ✅ User Profile
+- ✅ Dashboard
+- ✅ CRUD Projects
+- ✅ Project Details
+- ✅ Search
+- ✅ Pagination
+- ✅ Favorites
+- ✅ Image Upload
+- ✅ Dark / Light Theme
+- ✅ Responsive UI
 
-✅ CRUD Projects
+### 🚧 In Progress
 
-✅ Dashboard
-
-✅ Favorites
-
-✅ Image Upload
-
-✅ Pagination
-
-✅ Search
-
-✅ Filters
-
-✅ Dark / Light Theme
-
-🚧 SEO Improvements
-
-🚧 Metadata API
-
-🚧 Server Components
-
-🚧 Docker
-
-🚧 Deployment
+- Modals
+- Toast Notifications
+- Framer Motion Animations
+- Performance Optimization
+- SEO Improvements
+- Docker
+- Deployment
+- CI/CD
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Roman Okhremov**
 
 Frontend Developer
 
-React • Next.js • TypeScript • Node.js
+**Tech Stack**
 
-GitHub:
+- React
+- Next.js
+- TypeScript
+- Node.js
+- Express.js
+- MongoDB
+
+**GitHub**
+
 https://github.com/RomanFrontEndDeveloper
 
 ---
 
-## 📄 License
+# 📄 License
 
-This project is created for educational and portfolio purposes.
+This project was created for educational purposes and as a portfolio project.

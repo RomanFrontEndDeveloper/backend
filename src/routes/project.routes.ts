@@ -11,10 +11,7 @@ import { upload } from '../middleware/upload.middleware';
 import { adminMiddleware } from '../middleware/admin.middleware';
 
 const router = Router();
-// router.use((req, res, next) => {
-// 	console.log(req.method, req.originalUrl);
-// 	next();
-// });
+
 router.post(
 	'/',
 	authMiddleware,

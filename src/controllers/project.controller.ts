@@ -11,6 +11,10 @@ import { createProjectSchema } from '../validation/project.validation';
 import { ApiError } from '../utils/ApiError';
 import { uploadToCloudinary } from '../services/cloudinary.service';
 
+type ProjectParams = {
+	id: string;
+};
+
 export const createProjectController = async (req: Request, res: Response) => {
 	try {
 		const data = createProjectSchema.parse(req.body);
@@ -59,7 +63,10 @@ export const getProjectsController = async (req: Request, res: Response) => {
 	res.json(result);
 };
 
-export const updateProjectController = async (req: Request, res: Response) => {
+export const updateProjectController = async (
+	req: Request<ProjectParams>,
+	res: Response,
+) => {
 	try {
 		const data = createProjectSchema.parse(req.body);
 
@@ -93,7 +100,10 @@ export const updateProjectController = async (req: Request, res: Response) => {
 	}
 };
 
-export const getProjectByIdController = async (req: Request, res: Response) => {
+export const getProjectByIdController = async (
+	req: Request<ProjectParams>,
+	res: Response,
+) => {
 	const userId = req.userId!;
 	const userRole = req.userRole!;
 	const projectId = req.params.id;
@@ -103,7 +113,10 @@ export const getProjectByIdController = async (req: Request, res: Response) => {
 	res.json(result);
 };
 
-export const deleteProjectController = async (req: Request, res: Response) => {
+export const deleteProjectController = async (
+	req: Request<ProjectParams>,
+	res: Response,
+) => {
 	const userId = req.userId!;
 	const userRole = req.userRole!;
 	const projectId = req.params.id;

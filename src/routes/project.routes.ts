@@ -9,7 +9,9 @@ import {
 import { authMiddleware } from '../middleware/auth.middleware';
 import { adminMiddleware } from '../middleware/admin.middleware';
 import { upload } from '../middleware/upload.middleware';
+import { validate } from '../middleware/validate.middleware';
 import { validateObjectId } from '../middleware/validateObjectId.middleware';
+import { createProjectSchema } from '../validation/project.validation';
 
 const router = Router();
 
@@ -17,6 +19,7 @@ router.post(
 	'/',
 	authMiddleware,
 	upload.single('image'),
+	validate(createProjectSchema),
 	createProjectController,
 );
 
@@ -36,6 +39,7 @@ router.put(
 	authMiddleware,
 	validateObjectId,
 	upload.single('image'),
+	validate(createProjectSchema),
 	updateProjectController,
 );
 

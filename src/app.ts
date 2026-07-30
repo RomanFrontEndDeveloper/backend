@@ -19,9 +19,25 @@ app.get('/healthz', (_req, res) => {
 	res.status(200).send('OK');
 });
 
+const allowedOrigins = [
+	'http://localhost:3000',
+	'https://roman-freelancehub.vercel.app',
+	process.env.FRONTEND_URL,
+].filter(Boolean);
+
 app.use(
 	cors({
-		origin: process.env.FRONTEND_URL,
+		origin(origin, callback) {
+			if (!origin) {
+				return callback(null, true);
+			}
+
+			if (allowedOrigins.includes(origin)) {
+				return callback(null, true);
+			}
+
+			return callback(new Error('Not allowed by CORS'));
+		},
 		credentials: true,
 	}),
 );

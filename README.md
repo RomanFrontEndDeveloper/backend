@@ -1,6 +1,6 @@
-# FreelanceHub
+# Roman-FreelanceHub
 
-FreelanceHub is a modern full-stack freelance marketplace built with **Next.js**, **React**, **TypeScript**, **Node.js**, **Express**, and **MongoDB**.
+Roman-FreelanceHub is a modern full-stack freelance marketplace built with **Next.js**, **React**, **TypeScript**, **Node.js**, **Express**, and **MongoDB**.
 
 The application allows users to register, authenticate, create, browse, edit, and manage freelance projects through a modern, responsive interface.
 
@@ -109,7 +109,7 @@ backend/
 ## Clone Repository
 
 ```bash
-git clone https://github.com/RomanFrontEndDeveloper/FreelanceHub.git
+git clone https://github.com/RomanFrontEndDeveloper/Roman-FreelanceHub.git
 ```
 
 ---
@@ -157,13 +157,13 @@ http://localhost:5000
 ```bash
 cd backend
 
-docker build -t freelancehub-backend .
+docker build -t roman-freelancehub-backend .
 ```
 
 ## Run Docker Container
 
 ```bash
-docker run --env-file .env -p 5000:5000 freelancehub-backend
+docker run --env-file .env -p 5000:5000 roman-freelancehub-backend
 ```
 
 ---

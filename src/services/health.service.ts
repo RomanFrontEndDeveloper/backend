@@ -1,3 +1,3 @@
 export const getHealthStatus = () => {
-	return 'FreelanceHub Backend is running 🚀';
+	return 'Roman-FreelanceHub Backend is running 🚀';
 };

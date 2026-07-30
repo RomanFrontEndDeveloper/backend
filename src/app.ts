@@ -15,6 +15,10 @@ app.use(morgan('dev'));
 
 app.use(apiLimiter);
 
+app.get('/healthz', (_req, res) => {
+	res.status(200).send('OK');
+});
+
 app.use(
 	cors({
 		origin: process.env.FRONTEND_URL,

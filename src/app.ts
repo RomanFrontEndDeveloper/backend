@@ -4,12 +4,14 @@ import helmet from 'helmet';
 import router from './routes';
 import { errorMiddleware } from './middleware/error.middleware';
 import { apiLimiter } from './middleware/rateLimit.middleware';
+import morgan from 'morgan';
 
 const app = express();
 
 app.disable('x-powered-by');
 
 app.use(helmet());
+app.use(morgan('dev'));
 
 app.use(apiLimiter);
 

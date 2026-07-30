@@ -1,6 +1,8 @@
 # FreelanceHub
 
-FreelanceHub is a modern full-stack freelance marketplace built with **Next.js**, **React**, **TypeScript**, **Node.js**, **Express**, and **MongoDB**. The application allows users to register, authenticate, create, browse, edit, and manage freelance projects with a modern responsive interface.
+FreelanceHub is a modern full-stack freelance marketplace built with **Next.js**, **React**, **TypeScript**, **Node.js**, **Express**, and **MongoDB**.
+
+The application allows users to register, authenticate, create, browse, edit, and manage freelance projects through a modern, responsive interface.
 
 ---
 
@@ -25,6 +27,11 @@ FreelanceHub is a modern full-stack freelance marketplace built with **Next.js**
 - React Hook Form
 - TanStack Query
 - REST API
+- Backend Validation
+- Helmet Security
+- Rate Limiting
+- Request Logging (Morgan)
+- Docker Support
 - Clean UI with Tailwind CSS
 
 ---
@@ -49,9 +56,14 @@ FreelanceHub is a modern full-stack freelance marketplace built with **Next.js**
 - TypeScript
 - MongoDB
 - Mongoose
-- JWT
-- Cloudinary
+- JWT Authentication
+- Zod
 - Multer
+- Cloudinary
+- Helmet
+- Morgan
+- Express Rate Limit
+- Docker
 
 ---
 
@@ -86,13 +98,15 @@ backend/
 │   ├── validation/
 │   ├── app.ts
 │   └── server.ts
+├── Dockerfile
+└── .dockerignore
 ```
 
 ---
 
 # ⚙️ Installation
 
-## Clone repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/RomanFrontEndDeveloper/FreelanceHub.git
@@ -132,6 +146,24 @@ Runs on:
 
 ```text
 http://localhost:5000
+```
+
+---
+
+# 🐳 Docker
+
+## Build Docker Image
+
+```bash
+cd backend
+
+docker build -t freelancehub-backend .
+```
+
+## Run Docker Container
+
+```bash
+docker run --env-file .env -p 5000:5000 freelancehub-backend
 ```
 
 ---
@@ -185,13 +217,13 @@ NEXT_PUBLIC_API_URL=http://localhost:5000/api
 - Project Details
 - Search
 - Pagination
+- Favorites
 - Image Upload
 
 ## User
 
 - Dashboard
 - Profile
-- Favorites
 - Dark / Light Theme
 
 ---
@@ -228,8 +260,8 @@ DELETE  /api/favorites/:projectId
 
 # 📈 Current Status
 
-- ✅ Authentication
-- ✅ Registration
+- ✅ JWT Authentication
+- ✅ Registration & Login
 - ✅ Protected Routes
 - ✅ User Profile
 - ✅ Dashboard
@@ -239,18 +271,24 @@ DELETE  /api/favorites/:projectId
 - ✅ Pagination
 - ✅ Favorites
 - ✅ Image Upload
-- ✅ Dark / Light Theme
+- ✅ Backend Validation
+- ✅ Helmet Security
+- ✅ Rate Limiting
+- ✅ Request Logging (Morgan)
+- ✅ Docker Support
 - ✅ Responsive UI
+- ✅ Dark / Light Theme
+
+---
 
 ### 🚧 In Progress
 
-- Modals
+- Render Deployment
+- Vercel Deployment
 - Toast Notifications
 - Framer Motion Animations
 - Performance Optimization
 - SEO Improvements
-- Docker
-- Deployment
 - CI/CD
 
 ---
@@ -259,9 +297,9 @@ DELETE  /api/favorites/:projectId
 
 **Roman Okhremov**
 
-Frontend Developer
+Frontend / Full-Stack Developer
 
-**Tech Stack**
+## Tech Stack
 
 - React
 - Next.js
@@ -269,10 +307,15 @@ Frontend Developer
 - Node.js
 - Express.js
 - MongoDB
+- Docker
 
-**GitHub**
+## GitHub
 
 https://github.com/RomanFrontEndDeveloper
+
+## Portfolio
+
+https://portfolio-react-roman-okhremov.netlify.app/
 
 ---
 

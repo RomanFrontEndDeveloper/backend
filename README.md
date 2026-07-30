@@ -108,42 +108,41 @@ https://roman-freelancehub-backend.onrender.com/healthz
 
 # 📁 Project Structure
 
-```text
+````text
 Roman-FreelanceHub
 │
-├── frontend
-│   ├── app
-│   ├── shared
-│   │   ├── api
-│   │   ├── hooks
-│   │   ├── providers
-│   │   ├── ui
+├── backend
+│   ├── src
+│   │   ├── config
+│   │   ├── controllers
+│   │   ├── data
+│   │   ├── dto
+│   │   ├── middleware
+│   │   ├── models
+│   │   ├── routes
+│   │   ├── services
+│   │   ├── types
+│   │   ├── utils
 │   │   ├── validation
-│   │   └── utils
-│   ├── widgets
-│   ├── public
-│   ├── middleware.ts
-│   └── package.json
+│   │   ├── app.ts
+│   │   └── server.ts
+│   ├── Dockerfile
+│   ├── package.json
+│   └── tsconfig.json
 │
-└── backend
-    ├── src
-    │   ├── config
-    │   ├── controllers
-    │   ├── dto
-    │   ├── middleware
-    │   ├── models
-    │   ├── routes
-    │   ├── services
-    │   ├── types
-    │   ├── utils
-    │   ├── validation
-    │   ├── app.ts
-    │   └── server.ts
-    ├── Dockerfile
-    ├── .dockerignore
-    └── package.json
-```
-
+└── frontend
+    ├── app
+    ├── public
+    ├── shared
+    │   ├── api
+    │   ├── hooks
+    │   ├── providers
+    │   ├── ui
+    │   └── validation
+    ├── widgets
+    ├── package.json
+    ├── next.config.ts
+    └── tsconfig.json
 ---
 
 # ⚙️ Local Installation
@@ -154,7 +153,7 @@ Frontend
 
 ```bash
 git clone https://github.com/RomanFrontEndDeveloper/frontend.git
-```
+````
 
 Backend
 

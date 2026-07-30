@@ -10,22 +10,23 @@ export const authMiddleware = (
 	req: Request,
 	res: Response,
 	next: NextFunction,
-) => {
+): void => {
 	const authHeader = req.headers.authorization;
 
-	if (!authHeader || !authHeader.startsWith('Bearer ')) {
-		return res.status(401).json({
+	if (!authHeader?.startsWith('Bearer ')) {
+		res.status(401).json({
 			success: false,
-			message: 'Authorization token is missing',
+			message: 'Authorization token is missing.',
 		});
+		return;
 	}
 
-	const token = authHeader.split(' ')[1];
+	const token = authHeader.substring(7);
 
 	const jwtSecret = process.env.JWT_SECRET;
 
 	if (!jwtSecret) {
-		throw new Error('JWT_SECRET is not defined');
+		throw new Error('JWT_SECRET is not defined.');
 	}
 
 	try {
@@ -36,9 +37,9 @@ export const authMiddleware = (
 
 		next();
 	} catch {
-		return res.status(401).json({
+		res.status(401).json({
 			success: false,
-			message: 'Invalid or expired token',
+			message: 'Invalid or expired token.',
 		});
 	}
 };

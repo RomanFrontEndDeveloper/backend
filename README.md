@@ -2,17 +2,41 @@
 
 Roman-FreelanceHub is a modern full-stack freelance marketplace built with **Next.js**, **React**, **TypeScript**, **Node.js**, **Express**, and **MongoDB**.
 
-The application allows users to register, authenticate, create, browse, edit, and manage freelance projects through a modern, responsive interface.
+The application enables users to register, authenticate, create, browse, search, edit, delete, and manage freelance projects through a clean, responsive, and production-ready interface.
+
+The project was built as a portfolio application to demonstrate modern full-stack development practices.
 
 ---
 
-# 🚀 Features
+# 🚀 Live Demo
+
+## Frontend
+
+https://roman-freelancehub.vercel.app
+
+## Backend API
+
+https://roman-freelancehub-backend.onrender.com
+
+Health Check:
+
+https://roman-freelancehub-backend.onrender.com/healthz
+
+---
+
+# ✨ Features
+
+## Authentication
 
 - JWT Authentication
-- User Registration & Login
+- User Registration
+- User Login
 - Protected Routes
+- Persistent Authentication
 - User Profile
-- Dashboard
+
+## Projects
+
 - Create Projects
 - Edit Projects
 - Delete Projects
@@ -21,18 +45,30 @@ The application allows users to register, authenticate, create, browse, edit, an
 - Pagination
 - Favorite Projects
 - Image Upload (Cloudinary)
-- Dark / Light Theme
+
+## User Experience
+
 - Responsive Design
-- Form Validation (Zod)
-- React Hook Form
-- TanStack Query
+- Dark / Light Theme
+- Loading States
+- Form Validation
+- Error Handling
+- Clean UI
+
+## Backend
+
 - REST API
-- Backend Validation
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Cloudinary Upload
+- Zod Validation
 - Helmet Security
-- Rate Limiting
-- Request Logging (Morgan)
+- Express Rate Limit
+- Morgan Logging
 - Docker Support
-- Clean UI with Tailwind CSS
+- Global Error Handler
 
 ---
 
@@ -48,6 +84,9 @@ The application allows users to register, authenticate, create, browse, edit, an
 - TanStack Query
 - React Hook Form
 - Zod
+- Context API
+
+---
 
 ## Backend
 
@@ -56,10 +95,10 @@ The application allows users to register, authenticate, create, browse, edit, an
 - TypeScript
 - MongoDB
 - Mongoose
-- JWT Authentication
-- Zod
+- JWT
 - Multer
 - Cloudinary
+- Zod
 - Helmet
 - Morgan
 - Express Rate Limit
@@ -70,51 +109,62 @@ The application allows users to register, authenticate, create, browse, edit, an
 # 📁 Project Structure
 
 ```text
-frontend/
+Roman-FreelanceHub
 │
-├── app/
-├── shared/
-│   ├── api/
-│   ├── hooks/
-│   ├── providers/
-│   ├── ui/
-│   └── validation/
-├── widgets/
-├── public/
-└── ...
-
-backend/
+├── frontend
+│   ├── app
+│   ├── shared
+│   │   ├── api
+│   │   ├── hooks
+│   │   ├── providers
+│   │   ├── ui
+│   │   ├── validation
+│   │   └── utils
+│   ├── widgets
+│   ├── public
+│   ├── middleware.ts
+│   └── package.json
 │
-├── src/
-│   ├── config/
-│   ├── controllers/
-│   ├── dto/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── services/
-│   ├── types/
-│   ├── utils/
-│   ├── validation/
-│   ├── app.ts
-│   └── server.ts
-├── Dockerfile
-└── .dockerignore
+└── backend
+    ├── src
+    │   ├── config
+    │   ├── controllers
+    │   ├── dto
+    │   ├── middleware
+    │   ├── models
+    │   ├── routes
+    │   ├── services
+    │   ├── types
+    │   ├── utils
+    │   ├── validation
+    │   ├── app.ts
+    │   └── server.ts
+    ├── Dockerfile
+    ├── .dockerignore
+    └── package.json
 ```
 
 ---
 
-# ⚙️ Installation
+# ⚙️ Local Installation
 
-## Clone Repository
+## Clone repositories
+
+Frontend
 
 ```bash
-git clone https://github.com/RomanFrontEndDeveloper/Roman-FreelanceHub.git
+git clone https://github.com/RomanFrontEndDeveloper/frontend.git
+```
+
+Backend
+
+```bash
+git clone https://github.com/RomanFrontEndDeveloper/backend.git
 ```
 
 ---
 
-## Frontend
+# Frontend
 
 ```bash
 cd frontend
@@ -124,7 +174,7 @@ npm install
 npm run dev
 ```
 
-Runs on:
+Runs on
 
 ```text
 http://localhost:3000
@@ -132,7 +182,7 @@ http://localhost:3000
 
 ---
 
-## Backend
+# Backend
 
 ```bash
 cd backend
@@ -142,7 +192,7 @@ npm install
 npm run dev
 ```
 
-Runs on:
+Runs on
 
 ```text
 http://localhost:5000
@@ -150,29 +200,9 @@ http://localhost:5000
 
 ---
 
-# 🐳 Docker
-
-## Build Docker Image
-
-```bash
-cd backend
-
-docker build -t roman-freelancehub-backend .
-```
-
-## Run Docker Container
-
-```bash
-docker run --env-file .env -p 5000:5000 roman-freelancehub-backend
-```
-
----
-
 # 🔐 Environment Variables
 
-## Backend
-
-Create `.env`
+## Backend (.env)
 
 ```env
 PORT=5000
@@ -186,45 +216,59 @@ CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 
 CLOUDINARY_API_SECRET=
+
+FRONTEND_URL=http://localhost:3000
 ```
 
 ---
 
-## Frontend
+## Frontend (.env.local)
 
-Create `.env.local`
+Local development
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
 ```
 
+Production
+
+```env
+NEXT_PUBLIC_API_URL=https://roman-freelancehub-backend.onrender.com/api
+```
+
 ---
 
-# 📸 Main Features
+# 🐳 Docker
 
-## Authentication
+## Build
 
-- Register
-- Login
-- JWT Authentication
-- Protected Routes
+```bash
+docker build -t roman-freelancehub-backend .
+```
 
-## Projects
+## Run
 
-- Create Project
-- Edit Project
-- Delete Project
-- Project Details
-- Search
-- Pagination
-- Favorites
-- Image Upload
+```bash
+docker run --env-file .env -p 5000:5000 roman-freelancehub-backend
+```
 
-## User
+---
 
-- Dashboard
-- Profile
-- Dark / Light Theme
+# ☁️ Deployment
+
+## Frontend
+
+- Vercel
+
+https://roman-freelancehub.vercel.app
+
+---
+
+## Backend
+
+- Render
+
+https://roman-freelancehub-backend.onrender.com
 
 ---
 
@@ -238,6 +282,8 @@ POST   /api/auth/login
 GET    /api/auth/profile
 ```
 
+---
+
 ## Projects
 
 ```http
@@ -247,6 +293,8 @@ POST    /api/projects
 PATCH   /api/projects/:id
 DELETE  /api/projects/:id
 ```
+
+---
 
 ## Favorites
 
@@ -258,10 +306,26 @@ DELETE  /api/favorites/:projectId
 
 ---
 
+# 🔒 Security
+
+- Helmet
+- Express Rate Limit
+- Zod Validation
+- JWT Authentication
+- Protected Routes
+- Global Error Handling
+- Morgan Request Logging
+- ObjectId Validation
+
+---
+
 # 📈 Current Status
 
+## Completed
+
+- ✅ User Registration
+- ✅ User Login
 - ✅ JWT Authentication
-- ✅ Registration & Login
 - ✅ Protected Routes
 - ✅ User Profile
 - ✅ Dashboard
@@ -271,25 +335,28 @@ DELETE  /api/favorites/:projectId
 - ✅ Pagination
 - ✅ Favorites
 - ✅ Image Upload
+- ✅ Cloudinary Integration
 - ✅ Backend Validation
 - ✅ Helmet Security
-- ✅ Rate Limiting
-- ✅ Request Logging (Morgan)
-- ✅ Docker Support
-- ✅ Responsive UI
+- ✅ Express Rate Limiting
+- ✅ Morgan Logging
+- ✅ Docker
+- ✅ Backend Deployment (Render)
+- ✅ Frontend Deployment (Vercel)
+- ✅ Responsive Design
 - ✅ Dark / Light Theme
 
 ---
 
-### 🚧 In Progress
+## Planned Improvements
 
-- Render Deployment
-- Vercel Deployment
+- GitHub Actions (CI/CD)
 - Toast Notifications
 - Framer Motion Animations
 - Performance Optimization
 - SEO Improvements
-- CI/CD
+- Unit Testing
+- E2E Testing
 
 ---
 
@@ -299,7 +366,7 @@ DELETE  /api/favorites/:projectId
 
 Frontend / Full-Stack Developer
 
-## Tech Stack
+### Tech Stack
 
 - React
 - Next.js
@@ -309,16 +376,26 @@ Frontend / Full-Stack Developer
 - MongoDB
 - Docker
 
+---
+
 ## GitHub
 
 https://github.com/RomanFrontEndDeveloper
 
+---
+
 ## Portfolio
 
-https://portfolio-react-roman-okhremov.netlify.app/
+https://portfolio-react-roman-okhremov.netlify.app
+
+---
+
+## LinkedIn
+
+https://www.linkedin.com/in/roman-okhremov-9b0764369/
 
 ---
 
 # 📄 License
 
-This project was created for educational purposes and as a portfolio project.
+This project was created as a portfolio and educational project to demonstrate modern full-stack web development using React, Next.js, TypeScript, Node.js, Express, MongoDB, Docker, Render, and Vercel.
